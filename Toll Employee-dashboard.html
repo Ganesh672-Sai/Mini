@@ -1,112 +1,204 @@
 <!DOCTYPE html>
-<html>
-<head><title>Toll Employee-dashboard</title></head>
-<body class="center">
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Toll Employee</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Signup</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: Arial, sans-serif;
-      background: #f1f1f1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .form-card {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
+    .glass-container {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 15px;
+      padding: 40px;
+      width: 350px;
+      color: #fff;
+      animation: slideUp 0.8s ease-out;
     }
 
-    .form-card h2 {
-      margin-bottom: 1.5rem;
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h2 {
       text-align: center;
-      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
-      margin-bottom: 0.5rem;
-      color: #555;
-      font-weight: 500;
+      margin-bottom: 5px;
+      font-size: 0.9em;
     }
 
-    input, select {
+    input {
       width: 100%;
-      padding: 0.6rem;
-      margin-bottom: 1.2rem;
-      border: 1px solid #ccc;
+      padding: 10px;
+      border: none;
       border-radius: 8px;
-      font-size: 1rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
     }
 
-    input:focus, select:focus {
-      border-color: #007BFF;
-      outline: none;
+    input::placeholder {
+      color: #eee;
+    }
+
+    .error {
+      color: #ff9999;
+      font-size: 0.85em;
+      display: none;
     }
 
     button {
       width: 100%;
-      padding: 0.75rem;
-      background-color: #007BFF;
+      padding: 12px;
+      background-color: #6a11cb;
+      background-image: linear-gradient(to right, #2575fc, #6a11cb);
       border: none;
-      color: white;
-      font-size: 1rem;
       border-radius: 8px;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: 0.3s;
     }
 
     button:hover {
-      background-color: #0056b3;
+      opacity: 0.9;
+    }
+
+    .toggle-link {
+      text-align: center;
+      margin-top: 15px;
+      cursor: pointer;
+      color: #d1d1ff;
+      font-size: 0.9em;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
+  <div class="glass-container">
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h2>Login</h2>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" />
+      </div>
+      <p class="error" id="loginError">Invalid email or password.</p>
+      <button onclick="login()">Login</button>
+      <div class="toggle-link" onclick="toggleForm('signup')">Don't have an account? Sign Up</div>
+    </div>
 
-<div class="form-card">
-  <h2>Register Toll Employee</h2>
-  <form action="./TollReg" method="POST">
+    <!-- Signup Form -->
+    <div id="signupForm" class="hidden">
+      <h2>Sign Up</h2>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="signupName" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="signupEmail" placeholder="Enter your email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a password" />
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="text" id="signupPhone" placeholder="Your phone number" />
+      </div>
+      <p class="error" id="signupError">Email already exists.</p>
+      <button onclick="signup()">Sign Up</button>
+      <div class="toggle-link" onclick="toggleForm('login')">Already have an account? Login</div>
+    </div>
+  </div>
 
-    <label for="fullName">Full Name</label>
-    <input type="text" name="fullName" id="fullName" required>
+  <script>
+    function toggleForm(type) {
+      document.getElementById('loginForm').classList.toggle('hidden', type === 'signup');
+      document.getElementById('signupForm').classList.toggle('hidden', type === 'login');
+      document.getElementById('loginError').style.display = 'none';
+      document.getElementById('signupError').style.display = 'none';
+    }
 
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('users') || '[]');
+    }
 
-    <label for="phone_Number">Phone Number</label>
-    <input type="tel" name="phone_Number" id="phone_Number" required>
+    function saveUser(user) {
+      const users = getUsers();
+      users.push(user);
+      localStorage.setItem('users', JSON.stringify(users));
+    }
 
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
+    function signup() {
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value.trim();
+      const phone = document.getElementById('signupPhone').value.trim();
 
-    <label for="TollPlaza">Select Toll Plaza</label>
-    <select name="Tollplaza" id="TollPlaza" required>
-      <option value="">-- Select Toll Plaza --</option>
-      <option value="550004">Sultanpur</option>
-      <option value="550005">Dundigal</option>
-      <!-- Add more options dynamically from backend -->
-    </select>
+      const users = getUsers();
+      const existingUser = users.find(u => u.email === email);
+      if (existingUser) {
+        document.getElementById('signupError').style.display = 'block';
+        return;
+      }
 
-    <button type="submit">Register</button>
-  </form>
-</div>
+      const newUser = { name, email, password, phone };
+      saveUser(newUser);
+      alert("Signup successful! You can now login.");
+      toggleForm('login');
+    }
 
-</body>
-</html>
+    function login() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
 
+      const users = getUsers();
+      const validUser = users.find(u => u.email === email && u.password === password);
+
+      if (validUser) {
+        sessionStorage.setItem('loggedInUser', JSON.stringify(validUser));
+        alert("Login successful!");
+        // Redirect or dashboard logic here
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+  </script>
 </body>
 </html>
