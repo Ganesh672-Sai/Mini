@@ -1,7 +1,112 @@
 <!DOCTYPE html>
 <html>
-<head><title>User Dashboard</title></head>
+<head><title>Toll Employee-dashboard</title></head>
 <body class="center">
-  <h1>Welcome, User!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Employee</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-card {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-card h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-card">
+  <h2>Register Toll Employee</h2>
+  <form action="./TollReg" method="POST">
+
+    <label for="fullName">Full Name</label>
+    <input type="text" name="fullName" id="fullName" required>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="phone_Number">Phone Number</label>
+    <input type="tel" name="phone_Number" id="phone_Number" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+
+    <label for="TollPlaza">Select Toll Plaza</label>
+    <select name="Tollplaza" id="TollPlaza" required>
+      <option value="">-- Select Toll Plaza --</option>
+      <option value="550004">Sultanpur</option>
+      <option value="550005">Dundigal</option>
+      <!-- Add more options dynamically from backend -->
+    </select>
+
+    <button type="submit">Register</button>
+  </form>
+</div>
+
+</body>
+</html>
+
 </body>
 </html>
