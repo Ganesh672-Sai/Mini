@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Car Passing Toll Plaza</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .scene {
+      width: 100vw;
+      height: 100vh;
+      background: url('./Toll.jpg') no-repeat center bottom;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      position: relative;
+    }
+
+    .car {
+      width: 600px;
+      position: absolute;
+      bottom: 10px;
+      left: -600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <img src="./car-removebg-preview.png" alt="Car" class="car" id="car">
+  </div>
+
+  <script>
+    const car = document.getElementById('car');
+    let position = -600; // Start fully off-screen
+
+    function moveCar() {
+      if (position < window.innerWidth) {
+        position += 5;
+        car.style.left = position + 'px';
+        requestAnimationFrame(moveCar);
+      }
+    }
+
+    // Start the car animation after short delay (1 second)
+    setTimeout(() => {
+      moveCar();
+    }, 1000);
+
+    // Redirect to index.html after 6 seconds
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 6000);
+  </script>
+</body>
+</html>
